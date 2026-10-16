@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TLE 6 Week 5 Games</title>
+<style>
+:root{--bg:#fff0d9;--card:#fff;--ink:#2e1a0d;--acc:#ff6a00;--c2:#ffb800;--g1:#ff6a00;--g2:#ff2d6f;--ok:#1fb86a;--bad:#e5384b;--soft:#ffe0b0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body[data-s=i]{--bg:#e4f1ff;--acc:#1a73ff;--c2:#00c2a8;--g1:#1a73ff;--g2:#00c2a8;--soft:#cfe5ff}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--card:#2a2236;--ink:#fff3e6}body{--bg:#1a1424!important;--soft:#3b2f52!important}}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 15% 0,var(--soft),transparent 55%),var(--bg);color:var(--ink);font-family:system-ui,sans-serif;padding:12px;text-align:center;min-height:100vh}
+.wrap{max-width:520px;margin:0 auto}
+h1{font-size:1.6rem;margin:4px 0;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}h2{font-size:1rem;margin:12px 0 4px}
+.sub{opacity:.8;font-size:.85rem}.hide{display:none!important}
+.card{background:var(--card);border-radius:18px;padding:12px;box-shadow:0 3px 10px #0003;margin:8px 0}
+button{font:inherit;cursor:pointer;border:0;border-radius:14px;color:inherit}
+.b{background:var(--acc);color:#fff;padding:12px 20px;font-weight:800;margin:4px}.b.alt{background:var(--soft);color:var(--ink)}.b.big{font-size:1.2rem;padding:15px 30px}
+.chip{background:var(--soft);padding:9px 14px;margin:3px;font-weight:700;border:2px solid transparent}.chip.on{border-color:var(--acc);background:var(--acc);color:#fff}
+input,select,textarea{font:inherit;color:inherit;background:var(--soft);border:0;border-radius:10px;padding:8px}
+textarea{width:100%;height:110px;font-size:.76rem;text-align:left}
+.pl{display:inline-flex;gap:4px;align-items:center;margin:3px}.pl input{width:125px}
+.mid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.game{border-radius:20px;padding:16px 6px;color:#fff;font-weight:900;box-shadow:0 5px 0 #0003}
+.game small{display:block;font-weight:500;opacity:.92;font-size:.72rem}
+.game .e{font-size:3.2rem;display:block;animation:bob 1.6s infinite alternate}@keyframes bob{to{transform:translateY(-6px) rotate(6deg) scale(1.08)}}
+.hud{display:flex;justify-content:space-between;font-weight:800}
+.bar{height:10px;background:var(--soft);border-radius:6px;overflow:hidden;margin:5px 0}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--g1),var(--g2));width:100%;transition:width 1s linear}
+.pic{font-size:3.2rem;line-height:1.1}.q{font-size:1.05rem;font-weight:800;margin:6px 0}
+.arena{position:relative;height:330px;border-radius:18px;overflow:hidden;background:linear-gradient(#ffd38a,#ff9a62 60%,#ff5e7e);touch-action:none;user-select:none}
+body[data-s=i] .arena{background:linear-gradient(#9fd8ff,#5aa7ff 60%,#5b6cff)}
+.fb{position:absolute;left:0;top:0;width:104px;padding:9px 4px;border-radius:40px;color:#fff;font-weight:800;font-size:.72rem;line-height:1.1;box-shadow:inset -6px -6px 0 #0003}
+#rk{position:absolute;bottom:2px;font-size:2.8rem;transform:translateX(-50%)}
+.tgt{font-size:1.05rem;font-weight:900;background:var(--c2);color:#2e1a0d;border-radius:12px;padding:6px;margin:6px 0}
+.flash{animation:fs .3s}@keyframes fs{50%{filter:brightness(2)}}
+.step{display:block;width:100%;background:var(--soft);padding:12px 10px;font-weight:700;margin:6px 0;text-align:left;font-size:.9rem}.step.dn{background:var(--ok);color:#fff}
+.opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}.opt{background:var(--soft);padding:12px 8px;font-weight:800}.opt.x{opacity:.35}
+.dots{font-size:1.4rem;letter-spacing:4px}
+.tf{display:flex;gap:8px;align-items:center;text-align:left;margin:8px 0;font-weight:700;font-size:.88rem}.tf span{flex:1}.tf button{background:var(--soft);padding:10px;min-width:92px;font-weight:800}
+.mg{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.mc{aspect-ratio:1;background:var(--acc);color:#fff;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;border-radius:12px;padding:3px;line-height:1.1}
+.mc.up{background:var(--soft);color:var(--ink)}.mc.dn{background:var(--ok);color:#fff}
+.shake{animation:sh .4s}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.row{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-radius:10px;background:var(--soft);margin:5px 0;font-weight:700;text-align:left}.row.w{background:var(--acc);color:#fff}
+.fall{position:fixed;top:-30px;font-size:1.8rem;animation:fl 2.4s linear forwards;pointer-events:none;z-index:9}@keyframes fl{to{transform:translateY(110vh) rotate(360deg)}}
+</style></head><body data-s="f"><div class="wrap">
+
+<div id="home">
+ <div style="font-size:2.2rem">🥣🧺🔐🃏</div>
+ <h1>TLE 6 · Week 5 Adventure</h1>
+ <div class="sub">Grade 6 · Measuring Techniques &amp; Safety · Word Formatting</div>
+ <div class="card"><h2>Choose your lesson</h2><div id="subs"></div>
+  <h2>Players / Teams</h2><select id="pn"><option value="1">1 (Solo)</option><option>2</option><option>3</option><option selected>4</option></select><div id="pnames"></div>
+  <h2>Time per turn</h2><select id="time"><option value="60">1 minute</option><option value="90">1 minute 30 seconds</option><option value="120">2 minutes</option></select></div>
+ <div class="mid">
+  <button class="game" data-g="seq" style="background:linear-gradient(135deg,#ff8a00,#ff2d6f)"><span class="e">🥣</span>Step Sorter<small>Put the steps in order</small></button>
+  <button class="game" data-g="cat" style="background:linear-gradient(135deg,#7a3cff,#ff2d95)"><span class="e">🧺</span>Basket Catch<small>Catch the right group</small></button>
+  <button class="game" data-g="esc" style="background:linear-gradient(135deg,#1fb86a,#0a8f8f)"><span class="e">🔐</span>Escape Room<small>Crack 4 locks</small></button>
+  <button class="game" data-g="mem" style="background:linear-gradient(135deg,#00b8d9,#1f6bff)"><span class="e">🃏</span>Memory Match<small>Find the pairs</small></button>
+ </div>
+ <button class="b alt" id="edit">✏️ Edit questions &amp; puzzles</button>
+</div>
+
+<div id="editor" class="hide">
+ <h1>✏️ Edit Games</h1><div class="sub" id="esub"></div>
+ <div class="card">
+ <h2>Step Sorter: Title | step 1 ; step 2 ; step 3 (in correct order)</h2><textarea id="t0"></textarea>
+ <h2>Basket Catch: Emoji + item | GROUP</h2><textarea id="t1"></textarea>
+ <h2>Escape Room switches: Statement | True or False</h2><textarea id="t2"></textarea>
+ <h2>Escape Room quiz: Topic | Emoji | Question | Correct | Wrong | (Wrong)</h2><textarea id="t3"></textarea>
+ <h2>Memory Match: Item | Meaning</h2><textarea id="t4" style="height:90px"></textarea></div>
+ <button class="b" id="save">💾 Save</button><button class="b alt" id="reset">Reset</button><button class="b alt" id="back">← Back</button><div class="sub" id="emsg"></div>
+</div>
+
+<div id="stage" class="hide"></div>
+<div id="end" class="hide"><h1 id="et"></h1><div class="card" id="eb"></div><button class="b" id="again">↺ Play again</button></div>
+</div>
+<script>
+const SUBJ=[{k:'f',ic:'🍳',n:'FCS · Measuring',d:[`Flour|Sift the flour to remove lumps;Scoop to fill the cup to overflow. Do not shake;Level off with a spatula
+White sugar|Sifting is not needed unless lumpy;Fill the cup until overflowing. Do not tap it down;Level off with the spatula
+Brown sugar|Check if the sugar is lumpy. Roll out the lumps;Scoop into the cup and pack compactly
+Powdered food|Remove lumps by stirring;Dip the measuring spoon into the powder;Level with a spatula or back edge of a knife
+Solid fats|Fill the cup or spoon while pressing until full;Level with a straight edge of a knife or spatula
+Liquids|Place the measuring cup on a flat, level surface;Pour the liquid up to the measuring mark;Do not lift the cup. View it at eye level
+Safe measuring|Identify the ingredient;Select the appropriate measuring tool;Prepare the tool and ingredient;Measure the ingredient carefully;Check the measurement;Clean the work area and return the tools`,`🌾 Flour|DRY
+🍚 White sugar|DRY
+🟤 Brown sugar|DRY
+🧂 Baking powder|DRY
+🥄 Baking soda|DRY
+💧 Water|LIQUID
+🥛 Milk|LIQUID
+🫒 Cooking oil|LIQUID
+🧃 Fruit juice|LIQUID
+🧈 Margarine|SOLID FAT
+🐖 Lard|SOLID FAT
+✅ Check the markings|SAFE
+✅ Keep the area clean and dry|SAFE
+✅ Return tools properly|SAFE
+✅ Handle tools carefully|SAFE
+⚠️ Skip the markings|UNSAFE
+⚠️ Leave spills on the table|UNSAFE
+⚠️ Estimate by just looking|UNSAFE
+⚠️ Toss tools around|UNSAFE`,`Dry ingredients include flour, sugar and baking powder.|True
+Milk, water and oil are liquid ingredients.|True
+Liquids should be estimated by just looking.|False
+When measuring flour, shake the cup to settle it.|False
+Level off dry ingredients with a spatula.|True
+Liquids are read at eye level.|True
+You should lift the cup while reading a liquid measure.|False
+Brown sugar is packed compactly into the cup.|True
+White sugar needs sifting only if it is lumpy.|True
+Measuring tools are returned properly after use.|True
+It is safe to measure without checking the markings.|False
+The work area should be kept clean and dry.|True`,`Measuring|🌾|Which tool is best for measuring flour?|Dry measuring cup|Liquid measuring cup|Fork
+Measuring|🥛|Milk is measured with a...|Liquid measuring cup|Dry measuring cup|Chopping board
+Measuring|🧂|Baking powder is measured with a...|Measuring spoon|Whisk|Peeler
+Measuring|🟤|Brown sugar is scooped and...|Packed compactly|Shaken|Poured
+Measuring|🧈|Shortening is pressed into the cup until...|Full|Half|Spilling
+Measuring|🥣|Why is accurate measuring important?|It affects texture and taste|It makes tools shiny|It is not important
+Safety|🧼|After measuring, you should...|Clean the area and return tools|Leave tools on the table|Hide the tools
+Safety|🛢️|You spill oil on the table. You should...|Wipe it up right away|Ignore it|Walk over it
+Safety|👀|Check the measuring markings...|Every time|Never|Only sometimes
+Steps|🔢|What is the first step in safe measuring?|Identify the ingredient|Clean the area|Pour the liquid
+Steps|🔍|After measuring carefully, you...|Check the measurement|Throw it away|Skip ahead
+Dry or Liquid|🥞|Flour is...|Dry|Liquid
+Dry or Liquid|🫒|Cooking oil is...|Liquid|Dry`,`🌾 Flour|Sift, scoop, level off
+🍚 White sugar|Fill to overflow, level off
+🟤 Brown sugar|Pack compactly
+🧂 Baking powder|Stir lumps, dip spoon, level
+🧈 Margarine|Press until full, level
+🥛 Milk|Flat surface, eye level`]},{k:'i',ic:'💻',n:'ICT · Word Formatting',d:[`Portfolio setup|Open Microsoft Word;Create a new document;Type the title MY LEARNING PORTFOLIO;Apply watermark, page color and border;Add header, footer and page number;Save the document
+Watermark|Click the Design tab;Select Watermark;Choose SAMPLE or DRAFT
+Header and footer|Click the Insert tab;Choose Header and type your name;Choose Footer and type grade and section
+Page number|Click the Insert tab;Select Page Number;Choose the location;Choose a style
+Saving|Click File;Choose Save As;Type the file name;Click Save`,`💧 Watermark|DESIGN TAB
+🎨 Page Color|DESIGN TAB
+🖼️ Page Borders|DESIGN TAB
+🔢 Page Number|INSERT TAB
+⬆️ Header|INSERT TAB
+⬇️ Footer|INSERT TAB
+👤 Learner's name|HEADER
+🏷️ Document title|HEADER
+🎓 Grade and section|FOOTER
+📘 Grade 6 – ICT Activity|FOOTER`,`A watermark is faint text or an image behind the main content.|True
+A page border is placed around the edges of a page.|True
+The header is located at the bottom of the page.|False
+A footer can contain the learner's grade and section.|True
+Page numbers show the order of pages.|True
+Page color changes the background color of the page.|True
+A watermark may show words like DRAFT or SAMPLE.|True
+The footer is at the top of the page.|False
+A header can hold a name, title or subject.|True
+A watermark must hide the main text.|False
+A well-formatted document is clear, organized and readable.|True
+Formatting features should never be combined.|False`,`Features|🏷️|The My Learning Portfolio watermark word is...|SAMPLE|DRAFT|HELLO
+Features|📝|The Technology in Learning document watermark is...|DRAFT|SAMPLE|SCHOOL
+Features|👤|In the portfolio, the header shows your...|Name|Grade and section|Watermark
+Features|🎓|In the portfolio, the footer shows your...|Grade and section|Name|Page color
+Features|🔢|Which feature shows the order of pages?|Page Number|Watermark|Header
+Features|🖼️|Lines or designs around the page edges are...|Page Borders|Page Color|Footer
+Features|🎨|Which feature changes the page background?|Page Color|Watermark|Header
+Saving|💾|The portfolio is saved as...|My_Learning_Portfolio_Name.docx|portfolio.mp3|Name.png
+Saving|📄|The footer of the Technology activity is...|Grade 6 – ICT Activity|Your name|DRAFT
+Saving|✨|A well-formatted document should be...|Clear, organized and readable|Crowded and messy|Empty`,`💧 Watermark|Faint text behind content
+🎨 Page Color|Changes page background
+🖼️ Page Border|Lines around page edges
+🔢 Page Number|Shows order of pages
+⬆️ Header|Top: name or title
+⬇️ Footer|Bottom: grade and section`]}];
+const $=id=>document.getElementById(id),R=a=>a[Math.random()*a.length|0],S=a=>[...a].sort(()=>Math.random()-.5);
+const AV=["🦊","🐯","🐼","🦄"],fmt=s=>s==60?"1 minute":s==90?"1 minute 30 seconds":"2 minutes";
+let si=0,SQ=[],SO=[],TF=[],QZ=[],PA=[],P=[],T=60,SI=0,G="",ct=null,raf=null;
+function rd(k,d){try{return localStorage.getItem(k)||d}catch(e){return d}}
+function ld(){const s=SUBJ[si];document.body.dataset.s=s.k;s.d.forEach((d,n)=>$("t"+n).value=rd("w5"+s.k+n,d));parse();$("esub").textContent=s.ic+" "+s.n}
+const L=(id,m)=>$(id).value.split("\n").map(l=>l.split("|").map(x=>x.trim())).filter(p=>p.length>=m&&p[0]);
+function parse(){SQ=L("t0",2).map(p=>({t:p[0],s:p[1].split(";").map(x=>x.trim()).filter(Boolean)})).filter(x=>x.s.length>=2);
+ SO=L("t1",2).map(p=>({t:p[0],g:p[1].toUpperCase()}));TF=L("t2",2).map(p=>({s:p[0],a:/^t/i.test(p[1])}));
+ QZ=L("t3",5).map(p=>({c:p[0],p:p[1],q:p[2],a:p[3],w:p.slice(4).filter(Boolean)}));PA=L("t4",2).map(p=>({a:p[0],b:p[1]}))}
+function show(id){["home","editor","stage","end"].forEach(x=>$(x).classList.toggle("hide",x!==id))}
+function stop(){clearInterval(ct);cancelAnimationFrame(raf);raf=null;document.onkeydown=null}
+function subs(){$("subs").innerHTML=SUBJ.map((s,i)=>`<button class="chip ${i==si?"on":""}" data-i="${i}">${s.ic} ${s.n}</button>`).join("");
+ $("subs").querySelectorAll(".chip").forEach(e=>e.onclick=()=>{si=+e.dataset.i;subs();ld()})}
+function pn(){const n=+$("pn").value;$("pnames").innerHTML=Array.from({length:n},(_,i)=>`<span class="pl">${AV[i]}<input value="${n==1?"Player":"Team "+(i+1)}" maxlength="14"></span>`).join("")}
+$("pn").onchange=pn;$("edit").onclick=()=>{ld();show("editor")};$("back").onclick=()=>{ld();show("home")};
+$("save").onclick=()=>{parse();try{SUBJ[si].d.forEach((d,n)=>localStorage.setItem("w5"+SUBJ[si].k+n,$("t"+n).value))}catch(e){}$("emsg").textContent="✅ Saved!"};
+$("reset").onclick=()=>{try{[0,1,2,3,4].forEach(n=>localStorage.removeItem("w5"+SUBJ[si].k+n))}catch(e){}ld();$("emsg").textContent="Reset to default."};
+$("again").onclick=()=>show("home");
+function party(){for(let k=0;k<26;k++){const e=document.createElement("div");e.className="fall";e.textContent=["🎉","⭐","🏆","🥣","💻"][k%5];e.style.left=Math.random()*95+"vw";e.style.animationDelay=Math.random()*.9+"s";document.body.appendChild(e);setTimeout(()=>e.remove(),3400)}}
+document.querySelectorAll(".game").forEach(b=>b.onclick=()=>{parse();const g=b.dataset.g;
+ if((g=="seq"&&SQ.length<1)||(g=="cat"&&new Set(SO.map(x=>x.g)).size<2)||(g=="esc"&&(SQ.length<1||TF.length<3||QZ.length<2))||(g=="mem"&&PA.length<3)){alert("Not enough items. Open ✏️ Edit and add more.");return}
+ G=g;T=+$("time").value;P=[...$("pnames").querySelectorAll("input")].map((e,i)=>({n:e.value||"Team "+(i+1),av:AV[i],sc:0,note:""}));SI=0;ready()});
+const INFO={seq:"Tap the steps in the CORRECT ORDER. Finish as many puzzles as you can. Fewer mistakes = more points!",
+ cat:"Drag your finger or mouse (or use ◀ ▶ keys) to move the basket. Catch ONLY the items from the target group. Wrong catches cost points!",
+ esc:"You are locked in! Crack 4 locks (quiz, step order and true-or-false switches) before time runs out.",
+ mem:"Flip cards to match each item with its meaning. Clear the board, then a new one appears!"};
+function ready(){const p=P[SI];$("stage").innerHTML=`<h1>${p.av} ${p.n}, get ready!</h1><div class="card"><div style="font-size:3rem">${{seq:"🥣",cat:"🧺",esc:"🔐",mem:"🃏"}[G]}</div><div>${INFO[G]}</div><div class="sub" style="margin-top:6px">Time: ${fmt(T)}</div></div><button class="b big" id="go">▶ Go!</button><br><button class="b alt" id="mn">← Menu</button>`;
+ show("stage");$("go").onclick=()=>({seq:sorter,cat,esc,mem})[G]();$("mn").onclick=()=>{stop();show("home")}}
+function hud(p,x){$("stage").innerHTML=`<div class="hud"><span>${p.av} ${p.n}</span><span>⭐ <span id="sc">0</span></span><span>⏱ <span id="tc"></span></span></div><div class="bar"><i id="tb2"></i></div>${x}`}
+function runT(onEnd){let left=T;clearInterval(ct);const tk=()=>{$("tc").textContent=Math.floor(left/60)+":"+String(left%60).padStart(2,"0");$("tb2").style.width=(left/T*100)+"%";if(left<=0){stop();onEnd();return}left--};tk();ct=setInterval(tk,1000);return()=>left}
+function fin(score,note){stop();const p=P[SI];p.sc=score;p.note=note||"";if(++SI<P.length)ready();else results()}
+function results(){const r=[...P].sort((a,b)=>b.sc-a.sc),tie=r.length>1&&r[0].sc==r[1].sc;
+ $("et").textContent=P.length==1?"⏰ Time's up!":tie?"🤝 It's a tie!":"🏆 "+r[0].n+" wins!";
+ $("eb").innerHTML=r.map((p,i)=>`<div class="row ${i==0&&!tie?"w":""}"><span>${i+1}. ${p.av} ${p.n}<br><small>${p.note}</small></span><span>⭐ ${p.sc}</span></div>`).join("");show("end");party()}
+const bad=el=>{el.classList.remove("shake");void el.offsetWidth;el.classList.add("shake")};
+// ---------- order builder (shared)
+function orderUI(box,cur,onDone,onWrong){let sel=0,base;do{base=S(cur.s)}while(cur.s.length>2&&base.join()==cur.s.join());
+ const dr=()=>{box.innerHTML=base.map((x,i)=>`<button class="step ${i in done?"dn":""}">${done[i]?done[i]+". ":""}${x}</button>`).join("");
+  box.querySelectorAll(".step").forEach((b,i)=>b.onclick=()=>{if(i in done)return;if(base[i]===cur.s[sel]){done[i]=++sel;dr();if(sel==cur.s.length)onDone()}else{onWrong&&onWrong();bad(box);Object.keys(done).forEach(k=>delete done[k]);sel=0;setTimeout(dr,420)}})};
+ const done={};dr()}
+// ---------- 🥣 Step Sorter
+function sorter(){let d=S(SQ),sc=0,n=0,mis=0;hud(P[SI],`<div class="card"><div class="pic">🥣</div><div class="q" id="st"></div><div id="sb"></div></div>`);
+ const nx=()=>{if(!d.length)d=S(SQ);const c=d.pop();mis=0;$("st").textContent="Put the steps in order: "+c.t;orderUI($("sb"),c,()=>{sc+=Math.max(5,15-2*mis);n++;$("sc").textContent=sc;setTimeout(nx,700)},()=>mis++)};
+ nx();runT(()=>fin(sc,n+" puzzles solved"))}
+// ---------- 🧺 Basket Catch
+function cat(){const p=P[SI],gs=[...new Set(SO.map(x=>x.g))];let sc=0,tg=R(gs),objs=[],bx=0,last=0,caught=0,acc=0;
+ hud(p,`<div class="tgt" id="tg"></div><div class="arena" id="ar"><div id="rk">🧺</div></div><div class="sub">Drag to move · ◀ ▶ keys work too</div>`);
+ const ar=$("ar"),W=ar.clientWidth,H=ar.clientHeight,CL=["#ff2d95","#00b8d9","#7a3cff","#1fb86a","#e8590c"];bx=W/2;
+ const mv=x=>{bx=Math.max(35,Math.min(W-35,x));$("rk").style.left=bx+"px"};mv(bx);
+ ar.onpointermove=e=>mv(e.clientX-ar.getBoundingClientRect().left);ar.onpointerdown=ar.onpointermove;
+ document.onkeydown=e=>{if(e.key=="ArrowLeft")mv(bx-40);if(e.key=="ArrowRight")mv(bx+40)};
+ const setT=()=>{$("tg").textContent="🎯 Catch only: "+tg};setT();
+ const sw=setInterval(()=>{const o=gs.filter(g=>g!=tg);tg=R(o.length?o:gs);setT()},14000);
+ const spawn=()=>{if(!$("ar")){clearInterval(sp);clearInterval(sw);return}const pool=Math.random()<.55?SO.filter(x=>x.g==tg):SO.filter(x=>x.g!=tg),it=R(pool.length?pool:SO),el=document.createElement("div");
+  el.className="fb";el.style.background=CL[(Math.random()*5)|0];el.textContent=it.t;ar.appendChild(el);objs.push({el,g:it.g,x:Math.random()*(W-104),y:-50,v:70+Math.random()*35})};
+ spawn();const sp=setInterval(spawn,1000);last=performance.now();
+ const loop=n=>{if(!$("ar"))return;const dt=Math.min(.05,(n-last)/1000);last=n;
+  objs=objs.filter(o=>{o.y+=o.v*dt;o.el.style.transform=`translate(${o.x}px,${o.y}px)`;
+   if(o.y>H-80&&o.y<H-15&&Math.abs(o.x+52-bx)<66){o.el.remove();const ok=o.g==tg;if(ok){sc+=10;caught++}else sc=Math.max(0,sc-5);$("sc").textContent=sc;ar.classList.remove("flash");void ar.offsetWidth;ar.classList.add("flash");return false}
+   if(o.y>H){o.el.remove();return false}return true});raf=requestAnimationFrame(loop)};
+ raf=requestAnimationFrame(loop);runT(()=>{clearInterval(sw);clearInterval(sp);fin(sc,caught+" correct catches")});
+ const old=stop}
+// ---------- 🔐 Escape Room
+function esc(){const p=P[SI];let idx=0,gl,qs=S(QZ),tfs=S(TF).slice(0,3);const locks=["quiz","seq","tf","quiz"];
+ hud(p,`<div class="card"><div class="dots" id="dt"></div><div id="lk"></div></div>`);
+ const dots=()=>{$("dt").textContent=locks.map((_,i)=>i<idx?"🔓":"🔒").join(" ")};
+ const open=()=>{idx++;$("sc").textContent=idx*20;dots();if(idx>=locks.length){stop();const l=gl();setTimeout(()=>fin(80+Math.floor(l/3),"🏆 Escaped with "+l+" s left!"),500);return}setTimeout(room,500)};
+ function room(){dots();const t=locks[idx];
+  if(t=="quiz"){const b=qs.pop()||R(QZ);$("lk").innerHTML=`<div class="pic">${b.p}</div><div class="q">${b.q}</div><div class="opts">${S([b.a,...b.w]).map(o=>`<button class="opt">${o}</button>`).join("")}</div>`;
+   $("lk").querySelectorAll(".opt").forEach(e=>e.onclick=()=>{if(e.textContent==b.a)open();else{e.classList.add("x");bad($("lk"))}})}
+  else if(t=="seq"){const c=R(SQ);$("lk").innerHTML=`<div class="pic">🧩</div><div class="q">Order the steps: ${c.t}</div><div id="ob"></div>`;orderUI($("ob"),c,open)}
+  else{const ans=tfs.map(()=>null);$("lk").innerHTML=`<div class="pic">🧪</div><div class="q">Set every switch correctly!</div><div id="tl"></div><button class="b" id="tr">🔓 Try the lock</button>`;
+   const rn=()=>{$("tl").innerHTML=tfs.map((x,i)=>`<div class="tf"><span>${x.s}</span><button data-i="${i}">${ans[i]==null?"❓":ans[i]?"✅ True":"❌ False"}</button></div>`).join("");
+    $("tl").querySelectorAll("button").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;ans[i]=ans[i]==null?true:ans[i]?false:null;rn()})};rn();
+   $("tr").onclick=()=>{if(tfs.every((x,i)=>ans[i]===x.a))open();else bad($("lk"))}}}
+ room();gl=runT(()=>fin(idx*20,"Opened "+idx+" of 4 locks"))}
+// ---------- 🃏 Memory Match
+function mem(){let sc=0,boards=0;hud(P[SI],`<div class="mg" id="mg"></div>`);
+ const board=()=>{let cards=[];S(PA).slice(0,6).forEach((m,k)=>cards.push({k,e:m.a},{k,e:m.b}));cards=S(cards);let open=[],lock=false,found=0;const tot=cards.length/2;
+  const rn=()=>{$("mg").innerHTML=cards.map((c,i)=>`<div class="mc ${c.d?"dn":open.includes(i)?"up":""}" data-i="${i}">${c.d||open.includes(i)?c.e:"❔"}</div>`).join("");
+   $("mg").querySelectorAll(".mc").forEach(e=>e.onclick=()=>{const i=+e.dataset.i;if(lock||cards[i].d||open.includes(i))return;open.push(i);rn();
+    if(open.length==2){lock=true;const[a,b]=open.map(j=>cards[j]);setTimeout(()=>{if(!$("mg"))return;if(a.k==b.k){a.d=b.d=true;found++;sc+=10;$("sc").textContent=sc}open=[];lock=false;rn();if(found==tot){boards++;sc+=20;$("sc").textContent=sc;setTimeout(()=>{if($("mg"))board()},500)}},700)}})};rn()};
+ board();runT(()=>fin(sc,boards+" boards cleared"))}
+subs();pn();ld();
+</script></body></html>
